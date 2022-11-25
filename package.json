@@ -17,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/EvanBoyle/secretSantaSMS/issues"
   },
-  "homepage": "https://github.com/EvanBoyle/secretSantaSMS#readme"
+  "homepage": "https://github.com/EvanBoyle/secretSantaSMS#readme",
+  "dependencies": {
+    "twilio": "^3.83.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9"
+  }
 }
