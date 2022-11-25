@@ -11,25 +11,27 @@ const printResults = !sendTextMessage;
 // simplified input format - but feel free to create Person objects directly 
 // and call `computeSecretSanta` directly instead
 let secretSantas = [
-    ["James", "Lisa"], // an array is a couple, couples will not be matched
-    ["Jordan", "Nicole"],
-    ["Evan", "Sara"],
-    // "foobar" - a string is just a person, no couple/spouse rules apply
+    // an array is a couple, couples will not be matched
+    ["James:+11234567890", "Lisa:+11234567890"],
+    ["Jordan:+11234567890", "Nicole:+11234567890"],
+    ["Evan:+11234567890", "Sara:+11234567890"],
+    // a string is just a person, no couple/spouse rules apply
+    "Luna:+11234567890"
 ];
 
 const santaAssignments = computeSecretSanta(parsePeople(secretSantas));
 processSecretSantaResults(santaAssignments, printResults, sendTextMessage);
 
+// ------------------------- implementation below ----------------------------
+
 // prints secret santa pairings to the screen and/or sends text messages via twilio if you want to keep things secret
 function processSecretSantaResults(santaAssignments: Person[], print: boolean, text: boolean) {
-    if(text){
-        if(!twilioNumber || !accountSid || !authToken) {
-            throw new Error("Must set TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_PHONE to send text messages.")
+    if (text) {
+        if (!twilioNumber || !accountSid || !authToken) {
+            throw new Error("Must set TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_PHONE to send text messages.");
         }
     }
-    if(print){
-        console.log("🎄🎅🤶⛄🎁 Welcome to Secret Santa! 🎁⛄🤶🎅🎄");
-    }
+    console.log("🎄🎅🤶⛄🎁 Welcome to Secret Santa! 🎁⛄🤶🎅🎄");
     for (let s of santaAssignments) {
         if (print) {
             console.log(`🎄🎅🤶⛄🎁 ${s.name} has ${s.toGift?.name} 🎄🎅🤶⛄🎁`);
@@ -41,7 +43,7 @@ function processSecretSantaResults(santaAssignments: Person[], print: boolean, t
                     from: twilioNumber,
                     to: s.phone,
                 })
-                .then((_: any) => console.log(`sent message to ${s.name}`));
+                .then((_: any) => console.log(`✨📞 Sent text message to ${s.name} 📞✨`));
         }
     }
 }
@@ -54,7 +56,7 @@ type Person = {
 };
 
 // convenience function to produce a list of people (including spouses and phone numbers)
-// from an array or string arrays.
+// from an array of string arrays.
 function parsePeople(people: (string[] | string)[]): Person[] {
     const santas: Person[] = [];
     for (let p of people) {
