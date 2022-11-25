@@ -1,7 +1,7 @@
 # 🎄🎅🤶⛄🎁 Secret Santa SMS 🎁⛄🤶🎅🎄
 It's the day after Thanksgiving and it is time to choose Secret Santas! You could draw names from a hat... but that is far too easy and boring! 
 
-Amaze your in-laws and relatives by delivering the pairings as automated text messages via [Twilio](https://www.twilio.com/messaging/sms).
+Amaze your in-laws and relatives by delivering the pairings anonomously as automated text messages via [Twilio](https://www.twilio.com/messaging/sms).
 
 ```console
 $ yarn start --text
@@ -68,8 +68,8 @@ Once you're happy with your sample pairings and setup, you'll need to specify so
 
 ```console
 $ export TWILIO_ACCOUNT_SID="..."
-$ exportTWILIO_AUTH_TOKEN="..."
-$ exportTWILIO_PHONE="..."
+$ export TWILIO_AUTH_TOKEN="..."
+$ export TWILIO_PHONE="..."
 $ yarn start --text
 yarn run v1.22.10
 $ tsc index.ts && node index.js --text
